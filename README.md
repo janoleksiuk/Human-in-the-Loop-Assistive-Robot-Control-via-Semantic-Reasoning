@@ -74,6 +74,12 @@ Operationally, the framework can be read in three layers:
 
 The learned and symbolic pipelines are complementary in this repository rather than fully merged into one executable. The ontology module currently uses simulated pose input, while the Spot execution module uses its own PNN-based pose/action decoding chain.
 
+It implements the following workflow regarding the assistivie robot control based on the reasoning and network of ontologies reasoning:
+
+<img width="5891" height="4191" alt="fig2" src="https://github.com/user-attachments/assets/b963a17a-75bb-4be9-a1da-5986b9acac29" />
+
+<img width="5550" height="3166" alt="Posture I (3)" src="https://github.com/user-attachments/assets/fcd1503a-7317-4156-88e7-5693d9be0a22" />
+
 ## ⚙️ System requirements
 
 The following requirements can be inferred directly from the repository:
