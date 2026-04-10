@@ -1,0 +1,119 @@
+import argparse
+import sys
+import time
+import signal
+from pathlib import Path
+import cv2
+import numpy as np
+from ultralytics import YOLO
+from multiprocessing import shared_memory
+
+import bosdyn.client
+import bosdyn.client.util
+from bosdyn.client.lease import LeaseClient, LeaseKeepAlive
+from bosdyn.client.image import ImageClient
+from bosdyn.client.robot_command import RobotCommandClient
+from bosdyn.client.robot_state import RobotStateClient
+from bosdyn.client.manipulation_api_client import ManipulationApiClient
+
+from utils.spot_behaviours import stop_moving, stow_arm, sit
+from utils.spot_utils import print_battery_level
+from utils.shared_memory import DETECTED_ACTION_MEMORY_NAME
+from robot_task import robot_action
+
+
+# robot behaviour variables
+REPO_ROOT = Path(__file__).resolve().parents[3]
+MODEL_PATH = REPO_ROOT / "checkpoints" / "detection" / "yolo11n.pt"
+
+def get_action(received_data_shape, shm_buffer):
+    try:
+        action_value_arr = np.ndarray(received_data_shape, dtype=np.int64, buffer=shm_buffer.buf)
+        return action_value_arr[0]
+    except Exception as e:
+        print(f"[--- SPOT CONTROL ---]: Error while getting pose value: {e}")
+        return 0
+    
+
+def main():
+    # mapping multiprocessing shared memory
+    shm_detected_action = shared_memory.SharedMemory(name=DETECTED_ACTION_MEMORY_NAME) 
+    shm_detected_action_received_data_shape = (1,)
+
+    # handling process termination 
+    def cleanup(signum=None, frame=None):
+        print("[SPOT CONTROL]: cleaning up shared memory...")
+        shm_detected_action.close()
+        exit(0)
+    signal.signal(signal.SIGTERM, cleanup)
+    signal.signal(signal.SIGINT, cleanup)
+
+    parser = argparse.ArgumentParser()
+    bosdyn.client.util.add_base_arguments(parser)
+    parser.add_argument('--camera-source', default='hand_color_image', help='Using camera source')
+    options = parser.parse_args()
+    bosdyn.client.util.setup_logging(options.verbose)
+
+    try:
+        task_completed = False
+        bosdyn.client.util.setup_logging(options.verbose)
+        sdk = bosdyn.client.create_standard_sdk('SpotAssist')
+        robot = sdk.create_robot(options.hostname)
+        bosdyn.client.util.authenticate(robot)
+        robot.time_sync.wait_for_sync()
+
+        lease_client = robot.ensure_client(LeaseClient.default_service_name)
+        robot_command_client = robot.ensure_client(RobotCommandClient.default_service_name)
+        image_client = robot.ensure_client(ImageClient.default_service_name)
+        manipulation_client = robot.ensure_client(ManipulationApiClient.default_service_name)
+        robot_state_client = robot.ensure_client(RobotStateClient.default_service_name)
+        
+        state = robot_state_client.get_robot_state()
+        print_battery_level(state)
+
+        model = YOLO(str(MODEL_PATH))
+
+        with LeaseKeepAlive(lease_client, must_acquire=True, return_at_exit=True):
+            robot.power_on(timeout_sec=20)
+            assert robot.is_powered_on(), "[--- SPOT CONTROL ---]: Failed to power on Spot"
+
+            # waiting for appropiate pose
+            while True:
+                if not get_action(received_data_shape=shm_detected_action_received_data_shape, shm_buffer=shm_detected_action) == 1: 
+                # code action 1 = sit -> stand -> sit
+                # add your custom action sequneces code here
+                    time.sleep(0.5)
+                else:
+                    task_completed = robot_action(robot_command_client,
+                                                  robot_state_client=robot_state_client,
+                                                  image_client=image_client,
+                                                  manipulation_client=manipulation_client,
+                                                  model=model)
+                    break
+
+    except Exception as e:
+        print(f"[--- SPOT CONTROL ---]: An exception occurred: {e}")
+
+    finally:
+        try:
+            if not task_completed:
+                print("[--- SPOT CONTROL ---]: Task not accomplished.")
+                stop_moving(robot_command_client)
+                stow_arm(robot_command_client)
+                sit(robot_command_client)
+                robot.power_off(cut_immediately=False, timeout_sec=20)
+            else:
+               stop_moving(robot_command_client)
+               sit(robot_command_client)
+               robot.power_off(cut_immediately=False, timeout_sec=20)
+
+        except Exception as e:
+            print(f"[--- SPOT CONTROL ---]: Shutdown failed: {e}")
+
+        cv2.destroyAllWindows()
+        shm_detected_action.close()
+        
+
+if __name__ == '__main__':
+    if not main():
+        sys.exit(1)

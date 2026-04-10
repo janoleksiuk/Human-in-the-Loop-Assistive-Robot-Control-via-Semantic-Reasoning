@@ -1,0 +1,30 @@
+# Core scientific stack
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib
+networkx
+pydot
+Pillow
+
+# Deep learning and perception
+torch
+torchvision
+opencv-python
+ultralytics
+
+# Reasoning and visualization
+rdflib
+streamlit
+plotly
+
+# Optional model backends
+joblib
+xgboost
+
+# Hardware-specific dependencies
+bosdyn-api
+bosdyn-client
+bosdyn-core
+pyzed
