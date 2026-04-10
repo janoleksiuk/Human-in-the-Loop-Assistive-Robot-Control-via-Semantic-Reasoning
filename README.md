@@ -1,4 +1,16 @@
-# Assistive Robotics Framework
+# Human-in-the-Loop Assistive Robot Control via Semantic Reasoning
+
+<p align="left">
+  <strong>Authors:</strong>
+  Jan Oleksiuk<sup>1</sup>, Vibekananda Dutta<sup>1</sup>, Teresa Zielińska<sup>2</sup>, 
+  Quan Fu<sup>2</sup>, Listane E. Awong<sup>2</sup>, and Zuyang Fan<sup>2</sup>
+</p>
+
+<p align="left">
+  <sup>1</sup> <em>Warsaw University of Technology, Faculty of Mechatronics, 02-525 Warsaw, Poland</em><br>
+  <sup>2</sup> <em>Warsaw University of Technology, Faculty of Power and Aeronautics Engineering, 00-665 Warsaw, Poland</em>
+</p>
+
 
 ## 📚 Table of contents
 
