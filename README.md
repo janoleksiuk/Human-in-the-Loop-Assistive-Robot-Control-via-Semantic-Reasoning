@@ -11,6 +11,21 @@
   <sup>2</sup> <em>Warsaw University of Technology, Faculty of Power and Aeronautics Engineering, 00-665 Warsaw, Poland</em>
 </p>
 
+![Python](https://img.shields.io/badge/Python-3.10-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-installed-013243?style=for-the-badge&logo=numpy&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-installed-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![SciPy](https://img.shields.io/badge/SciPy-installed-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-installed-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-installed-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+![Torchvision](https://img.shields.io/badge/Torchvision-installed-5C3EE8?style=for-the-badge)
+![OpenCV](https://img.shields.io/badge/OpenCV-installed-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
+![Ultralytics](https://img.shields.io/badge/Ultralytics-installed-111111?style=for-the-badge)
+![Streamlit](https://img.shields.io/badge/Streamlit-installed-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-installed-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)
+![PyZED](https://img.shields.io/badge/PyZED-installed-00A6D6?style=for-the-badge)
+![SpotSDK](https://img.shields.io/badge/SpotSDK-installed-222222?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-FCC624?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Research--Ready-2EA043?style=for-the-badge)
 
 ## 📚 Table of contents
 
