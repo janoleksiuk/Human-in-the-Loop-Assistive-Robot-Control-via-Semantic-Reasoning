@@ -2,8 +2,7 @@
 
 <p align="left">
   <strong>Authors:</strong>
-  Jan Oleksiuk<sup>1</sup>, Vibekananda Dutta<sup>1</sup>, Teresa Zielińska<sup>2</sup>, 
-  Quan Fu<sup>2</sup>, Listane E. Awong<sup>2</sup>, and Zuyang Fan<sup>2</sup>
+  Jan Oleksiuk<sup>1</sup>, Vibekananda Dutta<sup>1</sup>, Teresa Zielińska<sup>2</sup>
 </p>
 
 <p align="left">
