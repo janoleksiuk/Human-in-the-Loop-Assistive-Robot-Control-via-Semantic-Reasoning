@@ -47,6 +47,12 @@ At a system level, the repository models a perception-to-action pipeline for ass
 
 The repository is organized to make these roles explicit. Source code is grouped by subsystem under `src/`, and data and checkpoints are placed in dedicated top-level folders; root-level scripts expose the principal workflows. The codebase intentionally preserves the original implementations where possible, while improving naming, navigation, and documentation. Where behavior could not be inferred reliably, this README documents assumptions conservatively and marks unresolved details as placeholders instead of introducing unsupported claims. The result is a transparent reference implementation of an assistive robotics stack that spans perception, recognition, reasoning, and robot action.
 
+## ✅ Demonstration
+
+The exemplary robotic demonstartion of the system is presented below. Video in original resolution and videos of other robot assistance scenarios available upon request.
+
+https://github.com/user-attachments/assets/939ccf67-bad5-4ef7-b222-87029d29d204
+
 ## ✨ Listed key features
 
 - 🤖 Unified repository spanning HAR, ontology-based reasoning, and robotic task execution.
