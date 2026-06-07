@@ -90,9 +90,9 @@ The learned and symbolic pipelines are complementary in this repository rather t
 
 It implements the following workflow regarding the assistive robot control based on the reasoning and network of ontologies reasoning:
 
-<img width="5891" height="4191" alt="fig2" src="https://github.com/user-attachments/assets/b963a17a-75bb-4be9-a1da-5986b9acac29" />
+<img width="4438" height="1800" alt="fig1_3" src="https://github.com/user-attachments/assets/5d12e69f-2af9-434c-8369-798f0cf1d105" />
 
-<img width="5550" height="3166" alt="Posture I (3)" src="https://github.com/user-attachments/assets/fcd1503a-7317-4156-88e7-5693d9be0a22" />
+<img width="3698" height="2080" alt="Observation (8)" src="https://github.com/user-attachments/assets/e5ed5dd3-9213-465d-ba7f-14cc9dc56e77" />
 
 ## ⚙️ System requirements
 
